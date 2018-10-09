@@ -63,6 +63,8 @@ class Graph(object):
 
         for neighbour in self.__adjacency_list[last_vertex]:
 
+            if (restriction.get('max_distance') and self.get_distance_for_path(path + [neighbour]) > restriction.get('max_distance')):
+                continue
 
             if restriction.get('num_vertices'):
                 if neighbour == end and len(path + [neighbour]) == restriction.get('num_vertices'):
