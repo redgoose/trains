@@ -101,5 +101,23 @@ class TestGraph(unittest.TestCase):
 
         self.assertEqual(graph.get_num_paths(start='A', end='E', num_vertices=2), 0)
 
+
+    def test_get_min_distance(self):
+
+        graph = Graph()
+        graph.add_edge(Edge('A', 'E', 1))
+        graph.add_edge(Edge('A', 'B', 5))
+        graph.add_edge(Edge('B', 'C', 4))
+        graph.add_edge(Edge('C', 'D', 8))
+        graph.add_edge(Edge('D', 'E', 8))
+        graph.add_edge(Edge('E', 'A', 6))
+        graph.add_edge(Edge('A', 'C', 1))
+
+        self.assertEqual(graph.get_min_distance(start='A', end='A'), 7)
+        self.assertEqual(graph.get_min_distance(start='A', end='C'), 1)
+        self.assertEqual(graph.get_min_distance(start='A', end='B'), 5)
+        self.assertEqual(graph.get_min_distance(start='A', end='E'), 1)
+        self.assertEqual(graph.get_min_distance(start='E', end='A'), 6)
+
 if __name__ == '__main__':
     unittest.main()

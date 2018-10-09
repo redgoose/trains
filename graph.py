@@ -73,3 +73,56 @@ class Graph(object):
             if neighbour == end:
                 paths_found.append(path + [neighbour])
             self._find_paths(path + [neighbour], end, paths_found, max_length)
+
+
+    def get_min_distance(self, start, end):
+
+        if start == end:
+            distance = float('inf')
+
+            next_node = None
+            for v in self.__adjacency_list[start]:
+                dist, prev = self._dijkstra(v)
+                if dist[start] < distance:
+                    next_node = v
+                    distance = dist[start] + self.__adjacency_list[start][next_node]
+        else :
+            dist, prev = self._dijkstra(start)
+            distance = dist[end]
+
+        return distance
+
+
+    def _dijkstra(self, source):
+        q = set()
+        dist = {}
+        prev = {}
+
+        for v in self.__adjacency_list: # initialization
+            dist[v] = float('inf') # unknown distance from source to v
+            prev[v] = float('inf') # previous node in optimal path from source
+            q.add(v) # all nodes initially in q (unvisited nodes)
+
+        # # distance from source to source
+        dist[source] = 0
+
+        while q:
+            # node with the least distance selected first
+            min_dist = float('inf')
+            node = next(iter(q))
+            for u in q:
+                if dist[u] < min_dist:
+                    min_dist = dist[u]
+                    node = u
+            u = node
+
+            q.remove(u)
+
+            for v in self.__adjacency_list[u]: # where v is still in q
+                alt = dist[u] + self.__adjacency_list[u][v]
+                if alt < dist[v]: # a shorter path to v has been found
+                    dist[v] = alt
+                    prev[v] = u
+
+        return dist, prev
+
