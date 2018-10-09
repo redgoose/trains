@@ -1,12 +1,20 @@
+class Edge(object):
+
+ def __init__(self, u, v, weight=1):
+
+    self.u = u
+    self.v = v
+    self.weight = weight
+
+
 class Graph(object):
 
-    def __init__(self, edge_list):
-
-        # build adjacency list based on provided edge list
+    def __init__(self):
         self.__adjacency_list = {}
 
-        for edge in edge_list:
-            self.__adjacency_list.setdefault(edge[0], {})[edge[1]] = edge[2]
+
+    def add_edge(self, edge):
+        self.__adjacency_list.setdefault(edge.u, {})[edge.v] = edge.weight
 
 
     def get_distance_for_path(self, path):
