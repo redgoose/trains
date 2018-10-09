@@ -36,43 +36,43 @@ class Graph(object):
         return distance
 
 
-    def get_num_paths(self, start, end, max_vertices=0, num_vertices=0):
+    def get_num_paths(self, start, end, restriction):
 
-        if not max_vertices and not num_vertices:
-            raise ValueError('One of max_vertices or num_vertices must be defined')
         if start not in self.__adjacency_list:
             raise KeyError(start)
         if end not in self.__adjacency_list:
             raise KeyError(end)
 
         paths_found = list()
-        max_length = max(max_vertices, num_vertices)
-        self._find_paths([start], end, paths_found, max_length)
+        self._find_paths([start], end, paths_found, restriction)
 
         # print paths_found
 
-        num_paths = 0
-        for path in paths_found:
-            if max_vertices and len(path) - 1 <= max_vertices:
-                num_paths += 1
-            elif num_vertices and len(path) - 1 == num_vertices:
-                num_paths += 1
-
-        return num_paths
+        return len(paths_found)
 
 
-    def _find_paths(self, path, end, paths_found, max_length):
-
-        if max_length and len(path) - 1 >= max_length:
-            # no need to proceed if excdeeding defined max
-            return
+    def _find_paths(self, path, end, paths_found, restriction):
 
         last_vertex = path[-1]
 
+        if (restriction.get('max_vertices') and len(path) >= restriction.get('max_vertices')):
+            return
+
+        if (restriction.get('num_vertices') and len(path) >= restriction.get('num_vertices')):
+            return
+
         for neighbour in self.__adjacency_list[last_vertex]:
-            if neighbour == end:
+
+
+            if restriction.get('num_vertices'):
+                if neighbour == end and len(path + [neighbour]) == restriction.get('num_vertices'):
+                    paths_found.append(path + [neighbour])
+
+            elif neighbour == end:
                 paths_found.append(path + [neighbour])
-            self._find_paths(path + [neighbour], end, paths_found, max_length)
+
+
+            self._find_paths(path + [neighbour], end, paths_found, restriction)
 
 
     def get_min_distance(self, start, end):

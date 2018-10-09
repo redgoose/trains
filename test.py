@@ -82,24 +82,23 @@ class TestGraph(unittest.TestCase):
         graph.add_edge(Edge('D', 'E', 8))
         graph.add_edge(Edge('E', 'A', 6))
         graph.add_edge(Edge('A', 'C', 1))
-
-        self.assertEqual(graph.get_num_paths(start='A', end='C', max_vertices=3), 2)
-
-        # unbounded lookup
-        with self.assertRaises(ValueError):
-            graph.get_num_paths(start='A', end='C')
+        graph.add_edge(Edge('A', 'E', 1))
 
         # invalid end
         with self.assertRaises(KeyError):
-            graph.get_num_paths(start='A', end='F', max_vertices=3)
+            graph.get_num_paths(start='A', end='F', restriction={'max_vertices': 3})
 
         # invalid start
         with self.assertRaises(KeyError):
-            graph.get_num_paths(start='G', end='A', max_vertices=3)
+            graph.get_num_paths(start='G', end='A', restriction={'max_vertices': 3})
 
-        self.assertEqual(graph.get_num_paths(start='A', end='C', num_vertices=2), 1)
+        self.assertEqual(graph.get_num_paths(start='A', end='C', restriction={'num_vertices': 2}), 1)
 
-        self.assertEqual(graph.get_num_paths(start='A', end='E', num_vertices=2), 0)
+        self.assertEqual(graph.get_num_paths(start='A', end='E', restriction={'num_vertices': 3}), 0)
+
+        self.assertEqual(graph.get_num_paths(start='A', end='A', restriction={'num_vertices': 7}), 3)
+
+        self.assertEqual(graph.get_num_paths(start='A', end='A', restriction={'max_vertices': 7}), 7)
 
 
     def test_get_min_distance(self):
