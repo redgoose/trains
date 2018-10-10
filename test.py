@@ -139,6 +139,23 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(graph.get_num_paths(start='B', end='D', restriction={'max_distance': 12}), 1)
 
 
+    def test_large_graph(self):
+
+        graph = Graph()
+
+        for i in xrange(0, 1000):
+            graph.add_edge(Edge(str(i), str(i + 1), 5))
+
+            graph.add_edge(Edge(str(i), str(500), 5))
+        graph.add_edge(Edge(str(1000), str(250), 5))
+
+        self.assertEqual(graph.get_distance_for_path(['0', '1', '2']), 10)
+        self.assertEqual(graph.get_num_paths(start='0', end='500', restriction={'max_distance': 50}), 1023)
+        self.assertEqual(graph.get_min_distance(start='50', end='51'), 5)
+        self.assertEqual(graph.get_min_distance(start='1000', end='250'), 5)
+        self.assertEqual(graph.get_min_distance(start='0', end='1000'), 2505)
+
+
 class TestQuestions(unittest.TestCase):
 
     graph = Graph()
