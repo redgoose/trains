@@ -143,7 +143,7 @@ class TestGraph(unittest.TestCase):
 
         graph = Graph()
 
-        for i in xrange(0, 1000):
+        for i in range(0, 1000):
             graph.add_edge(Edge(str(i), str(i + 1), 5))
 
             graph.add_edge(Edge(str(i), str(500), 5))

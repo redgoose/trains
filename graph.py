@@ -24,7 +24,7 @@ class Graph(object):
 
         distance = 0
 
-        for i in xrange(0, len(path)-1):
+        for i in range(0, len(path)-1):
             current_vertex = path[i]
             next_vertex = path[i+1]
 
