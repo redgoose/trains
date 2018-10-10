@@ -169,29 +169,44 @@ class TestQuestions(unittest.TestCase):
     graph.add_edge(Edge('E', 'B', 3))
     graph.add_edge(Edge('A', 'E', 7))
 
-    def test_get_distance(self):
 
+    def test_question_1(self):
         self.assertEqual(self.graph.get_distance_for_path(['A', 'B', 'C']), 9)
+
+
+    def test_question_2(self):
         self.assertEqual(self.graph.get_distance_for_path(['A', 'D']), 5)
+
+
+    def test_question_3(self):
         self.assertEqual(self.graph.get_distance_for_path(['A', 'D', 'C']), 13)
+
+
+    def test_question_4(self):
         self.assertEqual(self.graph.get_distance_for_path(['A', 'E', 'B', 'C', 'D']), 22)
+
+
+    def test_question_5(self):
         self.assertEqual(self.graph.get_distance_for_path(['A', 'E', 'D']), 'NO SUCH ROUTE')
 
 
-    def test_get_num_paths(self):
-
+    def test_question_6(self):
         self.assertEqual(self.graph.get_num_paths(start='C', end='C', restriction={'max_vertices': 4}), 2)
+
+
+    def test_question_7(self):
         self.assertEqual(self.graph.get_num_paths(start='A', end='C', restriction={'num_vertices': 5}), 3)
 
 
-    def test_get_min_distance(self):
-
+    def test_question_8(self):
         self.assertEqual(self.graph.get_min_distance(start='A', end='C'), 9)
+
+
+    def test_question_9(self):        
         self.assertEqual(self.graph.get_min_distance(start='B', end='B'), 9)
 
 
-    def test_get_paths_with_distance(self):
-
+    def test_question_10(self):
         self.assertEqual(self.graph.get_num_paths(start='C', end='C', restriction={'max_distance': 29}), 7)
 
 
