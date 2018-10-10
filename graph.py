@@ -1,10 +1,10 @@
 class Edge(object):
 
- def __init__(self, u, v, weight=1):
+    def __init__(self, u, v, weight=1):
 
-    self.u = u
-    self.v = v
-    self.weight = weight
+        self.u = u
+        self.v = v
+        self.weight = weight
 
 
 class Graph(object):
@@ -55,15 +55,15 @@ class Graph(object):
 
         last_vertex = path[-1]
 
-        if (restriction.get('max_vertices') and len(path) >= restriction.get('max_vertices')):
+        if restriction.get('max_vertices') and len(path) >= restriction.get('max_vertices'):
             return
 
-        if (restriction.get('num_vertices') and len(path) >= restriction.get('num_vertices')):
+        if restriction.get('num_vertices') and len(path) >= restriction.get('num_vertices'):
             return
 
         for neighbour in self.__adjacency_list[last_vertex]:
 
-            if (restriction.get('max_distance') and self.get_distance_for_path(path + [neighbour]) > restriction.get('max_distance')):
+            if restriction.get('max_distance') and self.get_distance_for_path(path + [neighbour]) > restriction.get('max_distance'):
                 continue
 
             if restriction.get('num_vertices'):
@@ -88,7 +88,7 @@ class Graph(object):
                 if dist[start] < distance:
                     next_node = v
                     distance = dist[start] + self.__adjacency_list[start][next_node]
-        else :
+        else:
             dist, prev = self._dijkstra(start)
             distance = dist[end]
 
