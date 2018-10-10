@@ -21,12 +21,24 @@
 * Using DFS-like approach for `get_num_paths`, adapted from [here](https://stackoverflow.com/questions/8885647/find-all-paths-with-cycles-in-directed-graph-given-the-source-vertex)
 * Using Dijkstra's algorithm for `get_min_distance`. Algo didn't handle cycles so brute forced a condition for that case. There is likely a more elegant solution
 	
-## Run
+## Setup
+
+Requires Git and Docker
+
+### Build
 
 	git clone https://github.com/redgoose/trains.git
 	cd trains
 	docker build -t trains .
+
+### Run
+
 	docker run trains
+
+Above command will start a container and run the tests or you can run them manually using the following command
+
+	docker run -it trains sh
+	python test.py
 
 ## Usage
 
