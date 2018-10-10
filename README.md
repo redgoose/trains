@@ -6,10 +6,10 @@
 
 * Following PEP8
 * Reserved comments to explain non-obvious code
-* This was my second time (ever) working with a graph other than a basic khanacademy course on algorithms 2 week ago
+* This was my second time (ever) working with a graph other than a basic khanacademy course on algorithms 2 weeks ago
 
 ### Assumptions
-* Bad data will not be passed to graph object. Minimal exception handling has been added
+* Really bad data will not be passed to graph object. Minimal exception handling has been added
 
 ### Graph object
 
