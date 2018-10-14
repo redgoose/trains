@@ -118,6 +118,16 @@ class TestGraph(unittest.TestCase):
         self.assertEqual(graph.get_min_distance(start='A', end='E'), 1)
         self.assertEqual(graph.get_min_distance(start='E', end='A'), 6)
 
+        graph = Graph()
+        graph.add_edge(Edge('A', 'B', 4))
+        graph.add_edge(Edge('B', 'A', 2))
+        graph.add_edge(Edge('A', 'C', 1))
+        graph.add_edge(Edge('C', 'A', 3))
+
+        self.assertEqual(graph.get_min_distance(start='A', end='A'), 4)
+        self.assertEqual(graph.get_min_distance(start='B', end='B'), 6)
+        self.assertEqual(graph.get_min_distance(start='C', end='C'), 4)
+
 
     def test_get_paths_with_distance(self):
 

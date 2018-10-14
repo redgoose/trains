@@ -82,12 +82,10 @@ class Graph(object):
         if start == end:
             distance = float('inf')
 
-            next_node = None
-            for v in self.__adjacency_list[start]:
-                dist, prev = self._dijkstra(v)
-                if dist[start] < distance:
-                    next_node = v
-                    distance = dist[start] + self.__adjacency_list[start][next_node]
+            for vertex in self.__adjacency_list[start]:
+                dist, prev = self._dijkstra(vertex)
+                if (dist[start] + self.__adjacency_list[start][vertex]) < distance:
+                    distance = dist[start] + self.__adjacency_list[start][vertex]
         else:
             dist, prev = self._dijkstra(start)
             distance = dist[end]
